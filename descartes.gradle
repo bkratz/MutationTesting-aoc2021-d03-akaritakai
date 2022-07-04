@@ -31,7 +31,8 @@ dependencies {
 
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 
-    pitest 'org.pitest:pitest-junit5-plugin:1.0.0'
+    pitest 'org.pitest:pitest-junit5-plugin:0.15'
+    pitest 'eu.stamp-project:descartes:1.3.2'
 }
 
 test {
@@ -55,13 +56,13 @@ jacocoTestReport {
 }
 
 pitest {
-    pitestVersion = '1.9.0'
-    junit5PluginVersion = '1.0.0'
+    mutationEngine = 'descartes'
+    pitestVersion = '1.7.4'
+    junit5PluginVersion = '0.15'
     verbose = true
     timestampedReports = false
-    mutators = ['STRONGER']
     excludedMethods = ['equals', 'toString', 'hashCode', 'get*', 'set*']
     targetClasses = ['net.akaritakai.aoc2021.Puzzle*','net.akaritakai.aoc2021.TestPuzzle*']
     excludedClasses = ['net.akaritakai.aoc2021.PuzzleInput*']
-//    mutationThreshold = 85
+    reportDir = file("$buildDir/reports/descartes")
 }
